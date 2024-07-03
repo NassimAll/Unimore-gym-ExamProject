@@ -1,0 +1,25 @@
+{% extends "registration_base.html" %}
+{% load crispy_forms_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if user.is_staff %}
+     SignUp {{ form.user_group_name }} 
+    {% else %}
+    SignUp {{ form.user_group_name }} 
+{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="flex-container" style="padding-bottom: 60px">
+    <h1>Allenati con noi</h1>
+    <p>Si prega di compilare i campi necessari per la registrazione</p> 
+    
+  <form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <div><button type="submit" class="btn btn-success">Register</button></div>
+  </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %} 
+    <div class="flex-container" style="padding-bottom: 30px">
+    <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+    <div class="card" style="width:300px;margin-bottom: 40px">
+        <img class="card-img-top" src="{% static '/imgs/unimore.png' %}" alt="Card image">
+        <div class="card-body" style="text-align: center;">
+            <h5 class="card-title">{{ abbonamento.nome }}</h5>
+            <p>{{ abbonamento.descrizione }}</p>
+            <p class="card-text">
+                Prezzo: {{ abbonamento.tariffa }} €<br>
+                Durata: {{ abbonamento.durata_massima }} giorni/corsi
+            </p>
+            {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <button class="btn btn-success" type="submit">Attiva abbonamento</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,162 @@
+{% extends 'base_page.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %} 
+<div class="flex-container" style="padding-bottom: 50px;">
+<section style="background-color: #eee; padding-bottom: 30px">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{ user.profile_image.url }}" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3"> {{ user.cognome }} {{ user.nome }}</h5>
+            <div class="d-flex justify-content-center mb-2">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Aggiorna Foto Profilo</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+              <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Username</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"> {{ user.username }} </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nome</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.nome }}</p>
+              </div>
+            </div>
+            <hr>
+             <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Cognome</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.cognome }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.email }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Codice fiscale</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.codice_fiscale }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Data di nascita</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.data_nascita }}</p>
+              </div>
+            </div>
+              <hr>
+              <div class="row">
+                   <div class="col-sm-3">
+                <p class="text-muted mb-0"><a class="btn btn-primary" href="{% url 'unimoregym:update_profile' %}">Aggiorna profilo</a></p><hr>
+                       <p class="text-muted mb-0">  <a class="btn btn-primary"  href="{% url 'unimoregym:password_change' %}">Cambia Password</a> </p>
+
+                       </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+   {% comment %} <div id="prenotazioniContainer">
+        <!-- Container dove verranno inserite le prenotazioni -->
+    </div>{% endcomment %}
+
+    <div id="abbonamentiContainer" class="" style="margin: 10px">
+        <!-- Container dove verranno inseriti gli abbonamenti attivi -->
+    </div>
+  </div>
+</section>
+</div>
+
+    <script>
+// Funzione per caricare le prenotazioni corsi dell'utente
+function loadPrenotazioniCorsi() {
+    $.ajax({
+        url: '/gymapi/prenotazioni/',
+        method: 'GET',
+        success: function(response) {
+            var html = '<h3>Prenotazioni Corsi</h3><ul class="list-group">';
+            response.forEach(function(prenotazione) {
+                html += '<li class="list-group-item"><p><strong>ID Prenotazione:</strong> ' + prenotazione.idPrenotazione + '</p></li>';
+                html += '<li class="list-group-item"><p><strong>Sessione:</strong> ' + prenotazione.fk_sessione + '</p></li>';
+                html += '<li class="list-group-item"><p><strong>Data Prenotazione:</strong> ' + prenotazione.data_prenotazione + '</p></li>';
+                html += '<hr>';
+            });
+            html += '</ul>'
+            $('#prenotazioniContainer').html(html);
+        },
+        error: function(error) {
+            console.log('Errore durante il recupero delle prenotazioni corsi:', error);
+        }
+    });
+}
+
+// Funzione per caricare gli abbonamenti attivi dell'utente
+function loadAbbonamentiAttivi() {
+    $.ajax({
+        url: '/gymapi/abbonamenti/',
+        method: 'GET',
+        success: function(response) {
+            var html = '<h3>Abbonamenti Attivi</h3><ul class="list-group">';
+            response.forEach(function(abbonamento) {
+                html += '<div class="row"><div class="col-md-3">';
+                html += '<li class="list-group-item"><p><strong>Tipo Abbonamento:</strong> ' + abbonamento.fk_abbonamento + '</p>';
+                html += '<li class="list-group-item"><p><strong>Data Prenotazione:</strong> ' + abbonamento.data_prenotazione + '</p>';
+                html += '</div><div class="col-md-3"><img src="' + abbonamento.qr_abbonamento + '" alt="QR Abbonamento" class="img-thumbnail" width="150"></div></div>';
+                html += '<hr>';
+            });
+            $('#abbonamentiContainer').html(html);
+        },
+        error: function(error) {
+            console.log('Errore durante il recupero degli abbonamenti attivi:', error);
+        }
+    });
+}
+
+// Carica le prenotazioni corsi e gli abbonamenti attivi quando la pagina è pronta
+$(document).ready(function() {
+    {#loadPrenotazioniCorsi();#}
+    loadAbbonamentiAttivi();
+});
+</script>
+
+
+{% endblock %}

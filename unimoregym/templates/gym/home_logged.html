@@ -1,0 +1,76 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %} 
+
+    <div class="flex-container">
+ <p>
+<h1>Welcome
+    {% if user.is_authenticated %}
+     {{ user.username }}
+    {% else %}
+    Utente non registrato
+    {% endif %}
+</h1></p>
+    <hr>
+
+{% if "Owner" in user.groups.all.0.name or user.is_staff %}
+<br>
+    <h4 style="text-align: center">Operazioni di inserimenti</h4><hr>
+<div class="list-group">
+<a href="{% url 'unimoregym:create_corso' %}" class="list-group-item list-group-item-action">Aggiungi un corso</a>
+<a href="{% url 'unimoregym:create_abbonamento' %}" class="list-group-item list-group-item-action">Aggiungi una abbonamento</a>
+<a href="{% url 'unimoregym:create_trainer' %}" class="list-group-item list-group-item-action">Aggiungi un trainer</a>
+<a href="{% url 'unimoregym:create_sessione' %}" class="list-group-item list-group-item-action">Aggiungi una sessione di allenamento</a>
+</div>
+<br>
+ <hr>
+{% endif %}
+
+    <div id="reccomendation" class="jumbotron" style="margin-bottom: 50px">
+
+    </div>
+
+</div>
+
+
+    <script>
+function reccomendation_system() {
+    $.ajax({
+        url: '/gymapi/recommended-corsi/',
+        method: 'GET',
+        success: function(response) {
+            var html = '<h3>Consigliati:</h3><p>Visti i corsi prenotati ti consigliamo i seguenti per completare al meglio i tuoi allenamenti ' +
+                        '</p><ul class="list-group">';
+            if (response.length === 0) {
+                html += '<li class="list-group-item"> Non hai corsi prenotati, prenotane uno <a style="text-underline: auto" href="{% url 'unimoregym:sessioni_disponibili' %}">qui</a> per avere dei consigli sui prossimi allenamenti</li>'
+            }
+            for (const [prenotato, recommended] of Object.entries(response)){
+                    html += `<li class="list-group-item"><strong>${prenotato}:</strong><ul>`;
+                    recommended.forEach(corso => {
+                        html += `<li>${corso}</li>`;
+                    });
+                    html += '</ul><hr>';
+                }
+            html += '</ul>';
+            html += '<p> Clicca qui sotto per cercare e prenotare i tuoi prossimi allenamenti <br><br><a href="{% url 'unimoregym:cerca_sessioni' %}" class="btn btn-outline-primary">Cerca sessioni</a></p>'
+            html += '<hr>';
+
+            $('#reccomendation').html(html);
+        },
+        error: function(error) {
+            console.log('Errore durante il recupero delle prenotazioni corsi:', error);
+        }
+    });
+}
+
+$(document).ready(function() {
+    {#loadPrenotazioniCorsi();#}
+    reccomendation_system();
+});
+</script>
+
+{% endblock %}

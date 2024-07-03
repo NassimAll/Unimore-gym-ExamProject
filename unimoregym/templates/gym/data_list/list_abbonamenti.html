@@ -1,0 +1,48 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %}
+<div class="container" style="margin-bottom: 40px">
+
+    <h3 style="text-align: center"><strong>{{ view.titolo }}</strong></h3>
+    <hr>
+
+<div class="row" style="margin: 20px">
+        {% for a in object_list %}
+            <div class="col-md-4">
+                <div class="card" style="width:250px;">
+                    <img class="card-img-top" src="{% static '/imgs/unimore.png' %}" alt="Card image">
+                     <div class="card-body">
+                         <h5 class="card-title">{{ a.nome }}</h5>
+                            <p class="card-text">
+                                <div>
+                                  Prezzo: {{ a.tariffa }} €<br>
+                                  Durata: {{ a.durata_massima }} corsi/giorni
+                                </div><br>
+                                {% if user.is_authenticated %}
+                                <a class="btn btn-outline-success ms-auto " href="{% url 'unimoregym:iscrizione_abb' a.pk %}" type="submit" style="margin-right: 10px" >Attivalo qui</a>
+                                {% else %}
+                                    <p>Per attivare un abbonamento è necessario registrarsi</p>
+                                    <a class="btn btn-outline-success ms-auto " href="{% url 'register_client' %}" type="submit" style="margin-right: 10px" >Registrati qui</a>
+                                {% endif %}
+                            </p>
+                     {% if "Owner" in user.groups.all.0.name or user.is_staff %}
+                        <form method="post" action="{% url 'unimoregym:abb_delete' a.pk %}" style="display:inline;">
+                             {% csrf_token %}
+                            <button class="btn btn-outline-danger" type="submit">Elimina</button>
+                         </form>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                </div><div class="row" style="margin: 20px">
+            {% endif %}
+        {%endfor%}
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+
+{% extends 'base_page.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>I tuoi abbonamenti:</h1>
+    <ul class="list-group">
+    {% for abbonamento in abbonamenti_attivi %}
+            <li class="list-group-item">
+                Nome: {{ abbonamento.fk_abbonamento.nome }}<br>
+                Data di prenotazione: {{ abbonamento.data_prenotazione }}<br>
+                Data di scadenza: {{ abbonamento.data_scadenza }}<br>
+                {% if abbonamento.utilizzi_rimanenti  %}
+                    Utilizzi rimanenti: {{ abbonamento.utilizzi_rimanenti }}<br> {% endif %}
+             <form method="post" style="display:inline;" onsubmit="return deleteConfirm();">
+              {% csrf_token %}
+                <input type="hidden" name="abbonamento_id" value="{{ abbonamento.idabbonamento }}">
+              <button type="submit" class="btn btn-outline-danger">Disattiva abbonamento</button>
+            </form>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Non hai abbonamenti, attivane uno <a style="text-underline: auto" href="{% url 'unimoregym:ListaAbbonamenti' %}">qui</a>.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+    <script type="text/javascript">
+    function deleteConfirm() {
+      return confirm('Sei sicuro di voler disattivare questo abbonamento?');
+    }
+  </script>
+
+{% endblock %}

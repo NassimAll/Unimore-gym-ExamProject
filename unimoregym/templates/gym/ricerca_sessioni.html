@@ -1,0 +1,45 @@
+{% extends 'base_page.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %} 
+    <div class="h-200 p-5 bg-light border rounded-3">
+     <h2 style="text-align: center">Cerca sessioni disponibili</h2> <br>
+<hr>
+     <form method="get" action="{% url 'unimoregym:cerca_sessioni' %}">
+        {% crispy form %}
+        </form>
+
+{% if sessioni %}
+<h4>Risultati della ricerca:</h4>
+    {% for sessione in sessioni %}
+      <ul class="list-group">
+      <li class="list-group-item">
+        Corso: {{ sessione.fk_corso.nome }} <br>
+        Categoria: {{ sessione.fk_corso.categoria }} <br>
+        Trainer: {{ sessione.fk_corso.fk_trainer }} <br>
+        Durata: {{ sessione.fk_corso.durata }} minuti <br>
+        Data: {{ sessione.data }}<br>
+        Ora: {{ sessione.ora }}<br>
+        Sala: {{ sessione.sala_corso }}<br>
+        Disponibilità: {{ sessione.disponibilita }}<br>
+        <form method="post" action="{% url 'unimoregym:prenota_sessione'%}" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="sessione_id" value="{{ sessione.idSessione }}">
+          <button type="submit" class="btn btn-outline-success">Prenota questa sessione</button>
+        </form>
+      </li>
+        {% empty %}
+        <li class="list-group-item">
+            Nessuna sessione disponibile trovata
+        </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+    </div>
+
+{% endblock %}

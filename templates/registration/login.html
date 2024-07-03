@@ -1,0 +1,36 @@
+{% extends "registration_base.html" %}
+{% load crispy_forms_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if user.is_staff %}
+     LogIn {{ form.user_group_name }} 
+    {% else %}
+    LogIn {{ form.user_group_name }} 
+{% endif %}
+{% endblock %}
+
+{% block header1 %}
+  <h1>Accedi qui</h1>
+{% endblock %}
+
+
+{% block content %}
+    
+    {% if "notok" in request.GET.auth %}
+        <div class="alert alert-danger" role="alert">
+          Si è arrivati qui in quanto non si dispone dei permessi necessari per il servizio scelto!
+        </div>
+    {% endif %}
+
+    <div>
+  <form method="post">
+      
+    {% csrf_token %}
+    {{ form | crispy }}
+    <div style="text-align: center"><button type="submit" class="btn btn-success">Accedi</button></div>
+  </form>
+    <br>
+    </div>
+{% endblock %}

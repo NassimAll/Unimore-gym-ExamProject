@@ -1,0 +1,36 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %}
+   <h3 style="text-align: center"><strong>{{ view.titolo }}</strong></h3>
+    <hr>
+<div class="container" style="margin-bottom: 40px">
+ <div class="row" style="margin: 20px">
+{% for t in object_list %}
+<div class="col-md-4">
+<div class="card" style="width:250px">
+    <img class="card-img-top" src="{% static '/imgs/unimore.png' %}" alt="Card image">
+  <div class="card-body">
+    <h5 class="card-title"> {{ t.cognome }} {{ t.nome }}</h5>
+    <p class="card-text">
+      {{ t.descrizione }}
+    </p>
+
+    {% if "Owner" in user.groups.all.0.name or user.is_staff %}
+            <form method="post" action="{% url 'unimoregym:trainer_delete' t.pk %}" style="display:inline;">
+                 {% csrf_token %}
+                <button class="btn btn-outline-danger" type="submit">Elimina</button>
+             </form>
+    {% endif %}</div>
+</div>
+</div>
+    {% if forloop.counter|divisibleby:3 %}
+                </div><div class="row" style="margin: 20px">
+     {% endif %}
+{%endfor%}
+</div>
+</div>
+{% endblock %}

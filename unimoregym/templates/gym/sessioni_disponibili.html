@@ -1,0 +1,50 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %} 
+    <div class="h-200 p-5 bg-light border rounded-3" style="margin-bottom: 10px">
+     <h2 style="text-align: center">Sessioni disponibili</h2>
+    <hr>
+     <p> <a href="{% url 'unimoregym:cerca_sessioni' %}" class="btn btn-outline-primary">Cerca sessioni</a></p>
+    {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                    {% if reindirizza %}
+                        <br> Prenotane uno <a href="{% url 'unimoregym:ListaAbbonamenti' %}" style="text-underline: auto">qui</a>
+                    {% endif %}
+                </div>
+    {% endif %}
+    {% for sessione in sessioni %}
+      <ul class="list-group">
+      <li class="list-group-item">
+        Corso: {{ sessione.fk_corso.nome }} <br>
+        Categoria: {{ sessione.fk_corso.categoria }} <br>
+        Trainer: {{ sessione.fk_corso.fk_trainer }} <br>
+        Durata: {{ sessione.fk_corso.durata }} minuti <br>
+        Data: {{ sessione.data }}<br>
+        Ora: {{ sessione.ora }}<br>
+        Sala: {{ sessione.sala_corso }}<br>
+        Disponibilità: {{ sessione.disponibilita }}<br>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="sessione_id" value="{{ sessione.idSessione }}">
+          <button type="submit" class="btn btn-outline-success">Prenota questa sessione</button>
+        </form><br>
+      {% if "Owner" in user.groups.all.0.name or user.is_staff %}
+            <form method="post" action="{% url 'unimoregym:sessione_delete' sessione.pk %}" style="display:inline;">
+                 {% csrf_token %}
+                <button class="btn btn-outline-danger" type="submit">Elimina</button>
+             </form>
+    {% endif %}
+      </li>
+        {% empty %}
+        <li class="list-group-item">
+        Non ci sono sessioni prenotabili nel prossimo periodo.
+        </li>
+    {% endfor %}
+  </ul>    </div>
+
+{% endblock %}

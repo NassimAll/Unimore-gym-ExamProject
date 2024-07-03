@@ -1,0 +1,24 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %} 
+    <div class="h-200 p-5 bg-light border rounded-3" style="margin-bottom: 10px">
+     <h2>Recensioni {{ corso.nome }}</h2>
+    {% for rec in recensioni %}
+      <ul class="list-group">
+      <li class="list-group-item">
+      User: {{ rec.user.username }} <hr>
+      Stelle: {{ rec.stelle }} <br>
+      Commento: {{ rec.commento }}
+      </li>
+        {% empty %}
+        <li class="list-group-item">
+        Non ci recensioni per questo corso
+        </li>
+    {% endfor %}
+  </ul>    </div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %} 
+    <div class="h-200 p-5 bg-light border rounded-3">
+    <h2>Sessioni per il corso di {{ corso.nome }}</h2> <br>
+    Trainer addetto: {{ corso.fk_trainer }}
+    {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
+    {% endif %}
+      <ul class="list-group">
+    {% for sessione in sessioni %}
+
+      <li class="list-group-item">
+        Data: {{ sessione.data }}<br>
+        Ora: {{ sessione.ora }}<br>
+        Sala: {{ sessione.sala_corso }}<br>
+        Disponibilità: {{ sessione.disponibilita }}<br>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="sessione_id" value="{{ sessione.idSessione }}">
+          <button type="submit" class="btn btn-outline-success">Prenota questa sessione</button>
+        </form>
+      </li>
+        {% empty %}
+        <li class="list-group-item">
+        Non ci sono sessioni di {{ corso.nome }} prenotabili nel prossimo periodo.
+        </li>
+    {% endfor %}
+  </ul>    </div>
+
+{% endblock %}

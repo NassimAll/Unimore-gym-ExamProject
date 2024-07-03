@@ -1,0 +1,32 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %}
+   <div class="h-200 p-5 bg-light border rounded-3">
+        <h1>Rating {{ corso.nome }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="star-rating">
+                {% for i in "54321" %}
+                    <input type="radio" id="star{{ i }}" name="stelle" value="{{ i }}">
+                    <label for="star{{ i }}" title="{{ i }} stars">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 .587l3.668 7.568L24 9.423l-6 5.847 1.417 8.267L12 18.897l-7.417 4.64L6 15.27 0 9.423l8.332-1.268z"/>
+                        </svg>
+                    </label>
+                {% endfor %}
+            </div><br>
+            {{ form.commento }} <br><br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+{% endblock %}

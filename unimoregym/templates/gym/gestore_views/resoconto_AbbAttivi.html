@@ -1,0 +1,27 @@
+
+{% extends 'base_page.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %} Unimore training center {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{  view.titolo }}</h1>
+    <ul class="list-group">
+        {% for obj in object_list %}
+            <li class="list-group-item">
+                Utente relativo: {{ obj.fk_utente }} <br>
+                Cod. Abbonamento: {{ obj.fk_abbonamento.codice_abbonamento }} <br>
+                Data Prenotazione: {{ obj.data_prenotazione }} <br>
+                Data Scadenza: {{ obj.data_scadenza}} <br>
+                Utilizzi rimasti: {{ obj.utilizzi_rimanenti }}
+            </li>
+        {% empty %}
+            <li class="list-group-item"> {{ view.empty_message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
