@@ -22,6 +22,7 @@ class Abbonamento(models.Model):
 
 
 class Trainer(models.Model):
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=255)
     cognome = models.CharField(max_length=255)
     descrizione = models.TextField()
