@@ -15,7 +15,9 @@ from .forms import SignUpClientForm, SignUpOwnerForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 def homepage(request):
-    return render(request, template_name="home.html")
+    if request.user.is_authenticated:
+        return redirect("unimoregym:homeGym")
+    return render(request, "home.html")
 
 class GymUserLoginView(LoginView):
     template_name = 'registration/login.html'

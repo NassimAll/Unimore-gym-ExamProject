@@ -11,13 +11,11 @@
 {% endif %}
 {% endblock %}
 
-{% block header1 %}
-  <h1>Accedi qui</h1>
-{% endblock %}
+  
 
 
 {% block content %}
-    
+    <h1 style="text-align: center">Accedi qui</h1> <hr>
     {% if "notok" in request.GET.auth %}
         <div class="alert alert-danger" role="alert">
           Si è arrivati qui in quanto non si dispone dei permessi necessari per il servizio scelto!

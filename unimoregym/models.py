@@ -5,7 +5,7 @@ from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
-#Per la delete dell'immagine
+#Per la delete dell'immagine al momento della rimozione dell'abbonamento
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
