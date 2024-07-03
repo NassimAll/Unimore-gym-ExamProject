@@ -38,7 +38,15 @@ class GymUserUpdateForm(forms.ModelForm):
             raise ValidationError('Devi avere almeno 15 anni.')
         return data_nascita
 
+class UpdateAbbonamentoForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_id = "UpdateAbbonamento_crispy_form"
+    helper.form_method = "POST"
+    helper.add_input(Submit("submit", "Aggiorna Abbonamento"))
 
+    class Meta:
+        model = Abbonamento
+        fields = ['nome', 'tariffa', 'durata_massima']
 
 class CorsoSearchForm(forms.Form): #FORM PER RICERCA CORSI
     nome = forms.CharField(required=False, label='Nome')

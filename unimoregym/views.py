@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
@@ -506,7 +506,7 @@ def rate_corso(request, corso_id): #VIEW PER LA VALUTAZIONE DI UN CORSO
     if request.method == 'POST':
         form = RatingForm(request.POST)
         if form.is_valid():
-            if exist_rating: #se esiste gia cancello e poi ricreo, non ho avuto idea migliore
+            if exist_rating: #se esiste gia cancello e poi ricreo
                 exist_rating.delete()
                 rating = form.save(commit=False)
                 rating.corso = corso
@@ -591,3 +591,10 @@ class SessioneDeleteView(GroupRequiredMixin, DeleteView):
     group_required = ["Owner"]
     model = SessioneCorso
     success_url = reverse_lazy('unimoregym:sessioni_disponibili')
+
+class AbbonamentoUpdateView(GroupRequiredMixin, UpdateView):
+    group_required = ["Owner"]
+    model = Abbonamento
+    form_class = UpdateAbbonamentoForm
+    template_name = 'gym/gestore_views/update_entry.html'
+    success_url = reverse_lazy('unimoregym:ListaAbbonamenti')

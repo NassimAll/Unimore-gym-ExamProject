@@ -30,6 +30,7 @@
                                 {% endif %}
                             </p>
                      {% if "Owner" in user.groups.all.0.name or user.is_staff %}
+                      <a class="btn btn-outline-primary" href="{% url 'unimoregym:aggiorna_abbonamento' a.pk %}" style="margin-right: 10px">Aggiorna</a><hr>
                         <form method="post" action="{% url 'unimoregym:abb_delete' a.pk %}" style="display:inline;">
                              {% csrf_token %}
                             <button class="btn btn-outline-danger" type="submit">Elimina</button>

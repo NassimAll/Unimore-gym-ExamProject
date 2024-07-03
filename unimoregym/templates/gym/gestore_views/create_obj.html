@@ -10,7 +10,10 @@
 
 <div class="d-flex justify-content-center border border-dark">
 
-  {% crispy form %}
+  <form method="post">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
 
 </div>
 <br>

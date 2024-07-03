@@ -33,6 +33,7 @@ urlpatterns = [
     path('cerca_sessioni/', ricerca_sessioni, name='cerca_sessioni'),
     path('prenota_sessioni/', prenota_sessione, name='prenota_sessione'),
     path('corso/<str:corso_id>/rate/', rate_corso, name='rate_corso'),
-    path('corso/<str:corso_id>/ratings', list_ratings_corso, name='list_ratings_corso')
+    path('corso/<str:corso_id>/ratings', list_ratings_corso, name='list_ratings_corso'),
+    path('abbonamenti/<str:pk>/aggiorna/', AbbonamentoUpdateView.as_view(), name='aggiorna_abbonamento'),
 
 ]
