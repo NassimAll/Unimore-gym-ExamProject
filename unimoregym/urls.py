@@ -35,5 +35,6 @@ urlpatterns = [
     path('corso/<str:corso_id>/rate/', rate_corso, name='rate_corso'),
     path('corso/<str:corso_id>/ratings', list_ratings_corso, name='list_ratings_corso'),
     path('abbonamenti/<str:pk>/aggiorna/', AbbonamentoUpdateView.as_view(), name='aggiorna_abbonamento'),
+    path('sessione/<int:pk>/aggiorna/', SessioneUpdateView.as_view(), name='aggiorna_sessione'),
 
 ]

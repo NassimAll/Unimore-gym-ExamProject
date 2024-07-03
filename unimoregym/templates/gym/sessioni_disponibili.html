@@ -34,6 +34,7 @@
           <button type="submit" class="btn btn-outline-success">Prenota questa sessione</button>
         </form><br>
       {% if "Owner" in user.groups.all.0.name or user.is_staff %}
+            <a class="btn btn-outline-primary" href="{% url 'unimoregym:aggiorna_sessione' sessione.pk %}" style="margin-right: 10px">Aggiorna</a><hr>
             <form method="post" action="{% url 'unimoregym:sessione_delete' sessione.pk %}" style="display:inline;">
                  {% csrf_token %}
                 <button class="btn btn-outline-danger" type="submit">Elimina</button>

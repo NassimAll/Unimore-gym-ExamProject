@@ -595,6 +595,18 @@ class SessioneDeleteView(GroupRequiredMixin, DeleteView):
 class AbbonamentoUpdateView(GroupRequiredMixin, UpdateView):
     group_required = ["Owner"]
     model = Abbonamento
+    title = "Aggiorna Abbonamento"
     form_class = UpdateAbbonamentoForm
     template_name = 'gym/gestore_views/update_entry.html'
     success_url = reverse_lazy('unimoregym:ListaAbbonamenti')
+
+class SessioneUpdateView(UpdateView):
+    model = SessioneCorso
+    form_class = CreateSessioneForm
+    template_name = 'gym/gestore_views/update_entry.html'
+    success_url = reverse_lazy('unimoregym:sessioni_disponibili')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Aggiorna Sessione"
+        return context
