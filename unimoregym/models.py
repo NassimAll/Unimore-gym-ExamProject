@@ -1,9 +1,14 @@
 import datetime
+import os
 from datetime import timedelta
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
+#Per la delete dell'immagine
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+
 
 class Abbonamento(models.Model):
     codice_abbonamento = models.CharField(max_length=255, primary_key=True)
@@ -89,6 +94,11 @@ class AbbonamentiAttivi(models.Model):
             self.data_scadenza = datetime.date.today() + timedelta(days=self.fk_abbonamento.durata_massima)
             print(self.data_scadenza)
         super().save(*args, **kwargs)
+
+@receiver(post_delete, sender=AbbonamentiAttivi)
+def delete_qr_abbonamento_file(sender, instance, **kwargs):
+    if os.path.isfile(instance.qr_abbonamento.path):
+        os.remove(instance.qr_abbonamento.path)
 
 class Rating(models.Model):
     corso = models.ForeignKey(Corso, on_delete=models.CASCADE, related_name='ratings')
