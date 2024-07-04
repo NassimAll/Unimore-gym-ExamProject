@@ -10,6 +10,14 @@
     <div class="h-200 p-5 bg-light border rounded-3">
      <h2 style="text-align: center">Cerca sessioni disponibili</h2> <br>
 <hr>
+    {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                    {% if reindirizza %}
+                        <br> Prenotane uno <a href="{% url 'unimoregym:ListaAbbonamenti' %}" style="text-underline: auto">qui</a>
+                    {% endif %}
+                </div>
+    {% endif %}
      <form method="get" action="{% url 'unimoregym:cerca_sessioni' %}">
         {% crispy form %}
         </form>
@@ -34,9 +42,10 @@
         </form>
       </li>
         {% empty %}
+        <ul class="list-group">
         <li class="list-group-item">
             Nessuna sessione disponibile trovata
-        </li>
+        </li></ul>
     {% endfor %}
   </ul>
 {% endif %}

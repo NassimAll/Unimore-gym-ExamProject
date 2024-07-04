@@ -411,7 +411,10 @@ def prenota_sessione(request):  #ACTION PER LA PRENOTAZONE, LO USO NELLA RICERCA
     abbonamenti_attivi = AbbonamentiAttivi.objects.filter(fk_utente=user)
 
     if not abbonamenti_attivi.exists():
-        return redirect('cerca_sessioni', error_message='Il tuo abbonamento non permette di prenotare corsi.')
+        form = CercaSessioniForm()
+        ctx = {'form': form, 'sessioni': [],
+               'error_message': 'Non possiedi abbonamenti per la prenotazione'}
+        return render(request, 'gym/ricerca_sessioni.html', ctx)
 
     # Inizializzare variabili di controllo per i tipi di abbonamento
     pp = False
@@ -433,20 +436,28 @@ def prenota_sessione(request):  #ACTION PER LA PRENOTAZONE, LO USO NELLA RICERCA
 
     # Logica di prenotazione basata sui tipi di abbonamento
     if pp and not pc:
-        return redirect('cerca_sessioni', error_message='Il tuo abbonamento non permette di prenotare corsi.')
+        form = CercaSessioniForm()
+        ctx = {'form': form, 'sessioni': [],
+               'error_message': 'Il tuo abbonamento non permette di prenotare corsi.'}
+        return render(request, 'gym/ricerca_sessioni.html', ctx)
     elif pc and pc_utilizzi_rimanenti == 0:
-        return redirect('cerca_sessioni',error_message='Non hai abbastanza utilizzi rimanenti per prenotare questo corso.')
+        form = CercaSessioniForm()
+        ctx = {'form': form, 'sessioni': [],
+               'error_message': 'Non hai abbastanza utilizzi rimanenti per prenotare questo corso.'}
+        return render(request, 'gym/ricerca_sessioni.html', ctx)
     elif pc and pc_utilizzi_rimanenti > 0:
         abbonamento_pc = abbonamenti_attivi.get(fk_abbonamento__codice_abbonamento__startswith='PC')
         abbonamento_pc.utilizzi_rimanenti -= 1
         abbonamento_pc.save()
 
     # Controllo se l'utente ha già prenotato un altro corso nella stessa data e ora
-    if PrenotazioneUtenteCorso.objects.filter(
-            fk_utente=user,
+    if PrenotazioneUtenteCorso.objects.filter(fk_utente=user,
             fk_sessione__data=sessione.data,
             fk_sessione__ora=sessione.ora).exists():
-        return redirect('cerca_sessioni', error_message='Hai già prenotato un altro corso nella stessa data e ora.')
+        form = CercaSessioniForm()
+        ctx = {'form': form, 'sessioni': [],
+               'error_message': 'Hai già prenotato un altro corso nella stessa data e ora.'}
+        return render(request, 'gym/ricerca_sessioni.html', ctx)
 
     # Controllare la disponibilità
     if sessione.disponibilita > 0:
@@ -458,7 +469,10 @@ def prenota_sessione(request):  #ACTION PER LA PRENOTAZONE, LO USO NELLA RICERCA
         sessione.save()
         return redirect('unimoregym:mieprenotazioni')
     else:
-        return redirect('cerca_sessioni', error_message='Non ci sono più posti disponibili per questa sessione.')
+        form = CercaSessioniForm()
+        ctx = {'form': form, 'sessioni': [],
+               'error_message': 'Non ci sono più posti disponibili per questa sessione.'}
+        return render(request, 'gym/ricerca_sessioni.html', ctx)
 
 
 @login_required

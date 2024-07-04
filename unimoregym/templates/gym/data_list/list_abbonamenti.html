@@ -9,7 +9,11 @@
 
     <h3 style="text-align: center"><strong>{{ view.titolo }}</strong></h3>
     <hr>
-
+{% if error_message %}
+        <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
+    {% endif %}
 <div class="row" style="margin: 20px">
         {% for a in object_list %}
             <div class="col-md-4">

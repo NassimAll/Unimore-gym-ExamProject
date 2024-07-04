@@ -231,12 +231,7 @@ def init_db():
         },
     ]
 
-    for trainer_data in trainers:
-        t = Trainer()
-        t.nome = trainer_data['nome']
-        t.cognome = trainer_data['cognome']
-        t.descrizione = trainer_data['descrizione']
-        t.save()
+
 
     # Popola i corsi
     corsi = [
@@ -245,191 +240,200 @@ def init_db():
             'nome': 'Yoga per principianti',
             'categoria': 'Benessere mentale',
             'descrizione': 'Corso di yoga per chi è alle prime armi.',
-            'fk_trainer': 'T2'
+            'fk_trainer': '2'
         },
         {
             'idcorso': 'C002',
             'nome': 'Spinning avanzato',
             'categoria': 'Aerobica',
             'descrizione': 'Lezione di spinning per avanzati.',
-            'fk_trainer': 'T3'
+            'fk_trainer': '3'
         },
         {
             'idcorso': 'C003',
             'nome': 'Body Building',
             'categoria': 'Forza',
             'descrizione': 'Corso intensivo di body building.',
-            'fk_trainer': 'T7'
+            'fk_trainer': '7'
         },
         {
             'idcorso': 'C004',
             'nome': 'Spinning Base',
             'categoria': 'Aerobica',
             'descrizione': 'Lezione di spinning per persone alle prime armi.',
-            'fk_trainer': 'T3'
+            'fk_trainer': '3'
         },
         {
             'idcorso': 'C005',
             'nome': 'Yoga',
             'categoria': 'Benessere mentale',
             'descrizione': 'Corso di yoga .',
-            'fk_trainer': 'T3'
+            'fk_trainer': '3'
         },
         {
             'idcorso': 'C006',
             'nome': 'Zumba',
             'categoria': 'Danza',
             'descrizione': 'Una lezione di fitness basata su movimenti di danza latino-americana. È divertente e ottima per bruciare calorie..',
-            'fk_trainer': 'T6'
+            'fk_trainer': '6'
         },
         {
             'idcorso': 'C007',
             'nome': 'Body Pump',
             'categoria': 'Forza',
             'descrizione': 'Un allenamento di resistenza che utilizza pesi leggeri e ripetizioni elevate per tonificare il corpo.',
-            'fk_trainer': 'T9'
+            'fk_trainer': '9'
         },
         {
             'idcorso': 'C008',
             'nome': 'CrossFit',
             'categoria': 'Alta-Intensità',
             'descrizione': 'Un programma di allenamento ad alta intensità che combina sollevamento pesi, ginnastica e cardio.',
-            'fk_trainer': 'T8'
+            'fk_trainer': '8'
         },
         {
             'idcorso': 'C009',
             'nome': 'HIIT',
             'categoria': 'Alta Intensità',
             'descrizione': 'Brevi sessioni di esercizi ad alta intensità intervallate da periodi di riposo o esercizi a bassa intensità.',
-            'fk_trainer': 'T4'
+            'fk_trainer': '4'
         },
         {
             'idcorso': 'C010',
             'nome': 'Kickboxing - base',
             'categoria': 'Arti marziali',
             'descrizione': 'Combina tecniche di boxe e calci per un allenamento cardiovascolare e di resistenza.',
-            'fk_trainer': 'T5'
+            'fk_trainer': '5'
         },
         {
             'idcorso': 'C011',
             'nome': 'Kickboxing - avanzato',
             'categoria': 'Arti marziali',
             'descrizione': 'Per quelli con già esperienza. Combina tecniche di boxe e calci per un allenamento cardiovascolare e di resistenza.',
-            'fk_trainer': 'T5'
+            'fk_trainer': '5'
         },
         {
             'idcorso': 'C012',
             'nome': 'Step Aerobics',
             'categoria': 'Aerobica',
             'descrizione': 'Un allenamento aerobico che utilizza una piattaforma rialzata, noto per migliorare il cardio e la forza delle gambe.',
-            'fk_trainer': 'T3'
+            'fk_trainer': '3'
         },
         {
             'idcorso': 'C013',
             'nome': 'Aquagym - base',
             'categoria': 'Acquafitness',
             'descrizione': 'Allenamento in acqua che è a basso impatto ma efficace per tonificare i muscoli e migliorare la resistenza cardiovascolare.',
-            'fk_trainer': 'T13'
+            'fk_trainer': '13'
         },
         {
             'idcorso': 'C014',
             'nome': 'Aquagym - avanzato',
             'categoria': 'Acquafitness',
             'descrizione': 'Allenamento in acqua che è a basso impatto ma efficace per tonificare i muscoli e migliorare la resistenza cardiovascolare.',
-            'fk_trainer': 'T13'
+            'fk_trainer': '13'
         },
         {
             'idcorso': 'C015',
             'nome': 'Functional Training',
             'categoria': 'Mobilità',
             'descrizione': 'Allenamento che si concentra su movimenti che imitano le attività quotidiane per migliorare la funzionalità generale del corpo.',
-            'fk_trainer': 'T12'
+            'fk_trainer': '12'
         },
         {
             'idcorso': 'C016',
             'nome': 'TRX (Total Resistance Exercises)',
             'categoria': 'Resistenza',
             'descrizione': 'Allenamento in sospensione che utilizza cinghie per sfruttare il peso del corpo e migliorare forza, equilibrio e flessibilità.',
-            'fk_trainer': 'T22'
+            'fk_trainer': '22'
         },
         {
             'idcorso': 'C017',
             'nome': 'Circuit Training',
             'categoria': 'Resistenza',
             'descrizione': 'Un allenamento che prevede il passaggio tra diverse stazioni di esercizi, migliorando forza e resistenza cardiovascolare.',
-            'fk_trainer': 'T22'
+            'fk_trainer': '22'
         },
         {
             'idcorso': 'C018',
             'nome': 'Boot Camp',
             'categoria': 'Alta Intensità',
             'descrizione': 'Allenamento ad alta intensità che combina esercizi militari con movimenti funzionali e cardio.',
-            'fk_trainer': 'T22'
+            'fk_trainer': '22'
         },
         {
             'idcorso': 'C019',
             'nome': 'Dance fitness - Hip Hop',
             'categoria': 'Danza',
             'descrizione': 'Include vari stili di danza come hip-hop, salsa, jazzercise, che rendono divertente e coinvolgente.',
-            'fk_trainer': 'T18'
+            'fk_trainer': '18'
         },
         {
             'idcorso': 'C020',
             'nome': 'Dance fitness - Salsa',
             'categoria': 'Danza',
             'descrizione': 'Include vari stili di danza come hip-hop, salsa, jazzercise, che rendono divertente e coinvolgente.',
-            'fk_trainer': 'T6'
+            'fk_trainer': '6'
         },
         {
             'idcorso': 'C021',
             'nome': 'Barre',
             'categoria': 'Tonificazione',
             'descrizione': 'Combina elementi di balletto, Pilates e yoga per tonificare i muscoli, migliorare la postura e aumentare la flessibilità',
-            'fk_trainer': 'T20'
+            'fk_trainer': '20'
         },
         {
             'idcorso': 'C022',
             'nome': 'Stretching',
             'categoria': 'Mobilità',
             'descrizione': 'Sessioni focalizzate sull\'allungamento dei muscoli per migliorare la flessibilità e prevenire infortuni.',
-            'fk_trainer': 'T19'
+            'fk_trainer': '19'
         },
         {
             'idcorso': 'C023',
-            'nome': 'Personal Trainig',
+            'nome': 'Personal Training',
             'categoria': 'Forza',
             'descrizione': 'Sessioni individuali con un allenatore che sviluppa un programma di allenamento personalizzato in base agli obiettivi del cliente.',
-            'fk_trainer': 'T11'
+            'fk_trainer': '11'
         },
         {
             'idcorso': 'C024',
             'nome': 'Small Group Training',
             'categoria': 'Gruppo',
             'descrizione': 'Allenamenti in piccoli gruppi che combinano l\'attenzione personalizzata con la motivazione di un gruppo..',
-            'fk_trainer': 'T19'
+            'fk_trainer': '19'
         },
         {
             'idcorso': 'C025',
             'nome': 'Body Combat - karate',
             'categoria': 'Arti Marziali',
             'descrizione': 'Un allenamento cardio ispirato alle arti marziali, che utilizza movimenti di karate, boxe, taekwondo e muay thai.',
-            'fk_trainer': 'T15'
+            'fk_trainer': '15'
         },
         {
             'idcorso': 'C026',
             'nome': 'Body Combat - Boxe',
             'categoria': 'Arti Marziali',
             'descrizione': 'Un allenamento cardio ispirato alle arti marziali, che utilizza movimenti di karate, boxe, taekwondo e muay thai.',
-            'fk_trainer': 'T16'
+            'fk_trainer': '16'
         },
         {
             'idcorso': 'C027',
             'nome': 'Body Combat - taekwondo',
             'categoria': 'Arti Marziali',
             'descrizione': 'Un allenamento cardio ispirato alle arti marziali, che utilizza movimenti di karate, boxe, taekwondo e muay thai.',
-            'fk_trainer': 'T17'
+            'fk_trainer': '17'
         },
     ]
+
+    for trainer_data in trainers:
+        t = Trainer()
+        t.nome = trainer_data['nome']
+        t.cognome = trainer_data['cognome']
+        t.descrizione = trainer_data['descrizione']
+        t.save()
+
+    trainers = Trainer.objects.all()
 
     for corso_data in corsi:
         #fk_trainer = Trainer.objects.get(idtrainer=corso_data["fk_trainer"])
@@ -438,7 +442,8 @@ def init_db():
         c.nome = corso_data['nome']
         c.categoria = corso_data['categoria']
         c.descrizione = corso_data['descrizione']
-        #c.fk_trainer = fk_trainer
+        #print((int(corso_data["fk_trainer"])-2))
+        c.fk_trainer = trainers[(int(corso_data["fk_trainer"])-2)]
         c.save()
 
 

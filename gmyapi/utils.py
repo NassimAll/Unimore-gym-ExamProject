@@ -8,16 +8,26 @@ MAPPA_CORSI_AFFINI = {
     'CrossFit': ['HIIT', 'Boot Camp', 'Stretching'],
     'HIIT': ['CrossFit', 'Boot Camp', 'Stretching'],
     'Boot Camp': ['CrossFit', 'HIIT', 'Stretching'],
-    'Spinning': ['CrossFit', 'Step Aerobics',' Functional Training'],
-    'Stretching': ['Personal Trainig', 'Circuit Training', ' Functional Training'],
-    'Step Aerobics': ['Personal Trainig', 'TRX (Total Resistance Exercises)', ' Functional Training'],
-    'Personal Trainig': ['Body Building', 'Body Pump', 'Stretching'],
+    'Spinning Base': ['CrossFit', 'Step Aerobics',' Functional Training'],
+    'Spinning avanzato': ['CrossFit', 'Step Aerobics',' Functional Training'],
+    'Stretching': ['Personal Training', 'Circuit Training', ' Functional Training'],
+    'Step Aerobics': ['Personal Training', 'TRX (Total Resistance Exercises)', ' Functional Training'],
+    'Personal Training': ['Body Building', 'Body Pump', 'Stretching'],
     'Body Pump': ['Body Building', 'Functional Training', 'Stretching'],
-    'Aquagym - base': ['Personal Trainig', 'Functional Training', 'Yoga'],
-    'Aquagym - avanzato': ['Personal Trainig', 'Functional Training', 'Yoga'],
-    'Yoga': ['Personal Trainig', 'Barre', 'Stretching'],
-    'Barre': ['Personal Trainig', 'Yoga', 'Zumba'],
-    'Body Building': ['Personal Trainig', 'Stretching', 'Functional Training']
+    'Aquagym - base': ['Personal Training', 'Functional Training', 'Yoga'],
+    'Aquagym - avanzato': ['Personal Training', 'Functional Training', 'Yoga'],
+    'Yoga': ['Personal Training', 'Barre', 'Stretching'],
+    'Yoga per principianti': ['Personal Training', 'Barre', 'Stretching'],
+    'Barre': ['Personal Training', 'Yoga', 'Zumba'],
+    'Body Building': ['Personal Training', 'Stretching', 'Functional Training'],
+    'Kickboxing - avanzato': ['Personal Training', 'Functional Training', 'Body Pump'],
+    'Kickboxing - base': ['Personal Training', 'Stretching', 'Functional Training'],
+    'Small Group Training': ['Zumba', 'CrossFit', 'Functional Training'],
+    'Body Combat - Boxe': ['Personal Training', 'Functional Training', 'Body Pump'],
+    'Body Combat - karate': ['Personal Training', 'Body Pump', 'Functional Training'],
+    'Body Combat - taekwondo': ['Personal Training', 'Body Pump', 'Functional Training'],
+    'Functional Training': ['Personal Training', 'Stretching', 'Spinning avanzato']
+
     # Altre possibilità non sono stato a metterle tutte
 }
 
