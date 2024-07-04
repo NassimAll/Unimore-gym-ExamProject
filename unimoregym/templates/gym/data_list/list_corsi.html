@@ -38,10 +38,11 @@
             <a class="btn btn-outline-success ms-auto " href="{% url 'register_client' %}" type="submit" style="margin-right: 10px" >Registrati qui</a>
         {% endif %}
         {% if "Owner" in user.groups.all.0.name or user.is_staff %}
+            <hr>            <a class="btn btn-outline-primary" href="{% url 'unimoregym:aggiorna_corso' c.pk %}" style="margin-right: 10px">Aggiorna</a><br>
             <form method="post" action="{% url 'unimoregym:corso_delete' c.pk %}" style="display:inline;">
                  {% csrf_token %}
                 <button class="btn btn-outline-danger" type="submit">Elimina</button>
-             </form>
+             </form><br>
         {% endif %}
     </p>
   </div>

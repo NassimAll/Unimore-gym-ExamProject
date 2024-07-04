@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>{{  view.titolo }}</h1>
+    <h1 style="text-align: center">{{  view.titolo }}</h1><hr>
     <ul class="list-group">
         {% for obj in object_list %}
             <li class="list-group-item">
@@ -24,6 +24,8 @@
             <li class="list-group-item"> {{ view.empty_message }}</li>
         {% endfor %}
     </ul>
+<br>
+    <hr>
 </div>
 {% endblock %}
 

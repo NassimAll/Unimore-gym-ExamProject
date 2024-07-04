@@ -537,16 +537,6 @@ def init_db():
         },
 
     ]
-    #
-    # for se_data in sessioni:
-    #     fk_corso = Corso.objects.get(idcorso=se_data["fk_corso"])
-    #     SessioneCorso.objects.update_or_create(
-    #         ora=se_data["ora"],
-    #         data=se_data["data"],
-    #         sala_corso=se_data["sala_corso"],
-    #         fk_corso_id=fk_corso,
-    #         defaults=se_data
-    #     )
 
     for sessione in sessioni:
         fk_corso = Corso.objects.get(idcorso=sessione["fk_corso"])

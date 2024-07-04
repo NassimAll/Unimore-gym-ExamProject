@@ -42,6 +42,6 @@ if settings.DEBUG:
 #Inizializzatoo una volta sola
 #erase_db()
 #init_db()
-#start_thread() #thread per la rimozione dei valori sccaduti nel db
+start_thread() #thread per la rimozione dei valori sccaduti nel db
 
 

@@ -10,7 +10,7 @@
 {% block content %}
     <div class="h-200 p-5 bg-light border rounded-3">
 
-<h2>Modifica il tuo profilo</h2>
+<h2 style="text-align: center">Modifica il tuo profilo</h2><hr>
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}

@@ -13,7 +13,8 @@ MAPPA_CORSI_AFFINI = {
     'Step Aerobics': ['Personal Trainig', 'TRX (Total Resistance Exercises)', ' Functional Training'],
     'Personal Trainig': ['Body Building', 'Body Pump', 'Stretching'],
     'Body Pump': ['Body Building', 'Functional Training', 'Stretching'],
-    'Aquagym': ['Personal Trainig', 'Functional Training', 'Yoga'],
+    'Aquagym - base': ['Personal Trainig', 'Functional Training', 'Yoga'],
+    'Aquagym - avanzato': ['Personal Trainig', 'Functional Training', 'Yoga'],
     'Yoga': ['Personal Trainig', 'Barre', 'Stretching'],
     'Barre': ['Personal Trainig', 'Yoga', 'Zumba'],
     'Body Building': ['Personal Trainig', 'Stretching', 'Functional Training']
@@ -35,5 +36,5 @@ def recommend_corsi(user):
             # Rimuoviamo i corsi già prenotati dall'utente
             recommended = [c for c in recommended if c not in booked_courses]
             recommendations[course] = recommended
-
+    print(recommendations)
     return recommendations

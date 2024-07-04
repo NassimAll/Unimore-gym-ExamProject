@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>Le tue prenotazioni attive</h1>
+    <h1 style="text-align: center">Le tue prenotazioni attive</h1><hr>
     <ul class="list-group">
         {% for prenotazione in prenotazioni %}
             <li class="list-group-item">
@@ -26,6 +26,7 @@
             <li class="list-group-item">Non hai prenotazioni attive, prenotale <a style="text-underline: auto" href="{% url 'unimoregym:sessioni_disponibili' %}">qui</a> </li>
         {% endfor %}
     </ul>
+<br><hr>
 </div>
 
     <script type="text/javascript">

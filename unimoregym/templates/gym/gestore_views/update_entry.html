@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load crispy_forms_filters %}
 
-{% block title %} Aggiorna Abbonamento {% endblock %}
+{% block title %} Aggiorna Entry {% endblock %}
 
 {% block content %}
 <div class="container">
@@ -11,6 +11,6 @@
         {% csrf_token %}
         {% crispy form %}
     </form>
-
+<br><hr>
 </div>
 {% endblock %}
