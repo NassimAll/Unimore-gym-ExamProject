@@ -338,6 +338,10 @@ def sessioni_disponibili(request): #MOSTRA UNA LISTA DI TUTTE LE SESSIONI
             sessione.save()
             return redirect('unimoregym:mieprenotazioni')
         else:
+            if pc and pc_utilizzi_rimanenti > 0:
+                abbonamento_pc = abbonamenti_attivi.get(fk_abbonamento__codice_abbonamento__startswith='PC')
+                abbonamento_pc.utilizzi_rimanenti += 1
+                abbonamento_pc.save()
             ctx = {'sessioni': sessioni,
                    'error_message': 'Non ci sono più posti disponibili per questa sessione.'}
             return render(request, 'gym/sessioni_disponibili.html', ctx)
@@ -469,6 +473,10 @@ def prenota_sessione(request):  #ACTION PER LA PRENOTAZONE, LO USO NELLA RICERCA
         sessione.save()
         return redirect('unimoregym:mieprenotazioni')
     else:
+        if pc and pc_utilizzi_rimanenti > 0:
+            abbonamento_pc = abbonamenti_attivi.get(fk_abbonamento__codice_abbonamento__startswith='PC')
+            abbonamento_pc.utilizzi_rimanenti += 1
+            abbonamento_pc.save()
         form = CercaSessioniForm()
         ctx = {'form': form, 'sessioni': [],
                'error_message': 'Non ci sono più posti disponibili per questa sessione.'}
@@ -617,7 +625,7 @@ class AbbonamentoUpdateView(GroupRequiredMixin, UpdateView):
 class SessioneUpdateView(GroupRequiredMixin, UpdateView):
     group_required = ["Owner"]
     model = SessioneCorso
-    form_class = CreateSessioneForm
+    form_class = UpdateSessioneForm
     title = "Aggiorna Sessione"
     template_name = 'gym/gestore_views/update_entry.html'
     success_url = reverse_lazy('unimoregym:sessioni_disponibili')

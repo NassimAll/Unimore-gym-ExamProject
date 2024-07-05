@@ -136,6 +136,9 @@ function loadAbbonamentiAttivi() {
         method: 'GET',
         success: function(response) {
             var html = '<h3>Abbonamenti Attivi</h3><ul class="list-group">';
+            if (response.length === 0) {
+                html += '<li class="list-group-item"> Non hai abbonamenti attivi, prenotane uno <a style="text-underline: auto" href="{% url 'unimoregym:ListaAbbonamenti' %}">qui</a></li>'
+            }
             response.forEach(function(abbonamento) {
                 html += '<div class="row"><div class="col-md-3">';
                 html += '<li class="list-group-item"><p><strong>Tipo Abbonamento:</strong> ' + abbonamento.fk_abbonamento + '</p>';

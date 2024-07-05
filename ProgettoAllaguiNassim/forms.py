@@ -28,6 +28,14 @@ class SignUpClientForm(UserCreationForm):
             raise forms.ValidationError('Il codice fiscale deve essere di 16 caratteri.')
         return codice_fiscale
 
+    def clean_data_nascita(self):
+        data_nascita = self.cleaned_data.get('data_nascita')
+        today = date.today()
+        age = today.year - data_nascita.year - ((today.month, today.day) < (data_nascita.month, data_nascita.day))
+        if age < 15:
+            raise forms.ValidationError('Devi avere almeno 15 anni.')
+        return data_nascita
+
 
 class SignUpOwnerForm(UserCreationForm):
     class Meta:

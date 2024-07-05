@@ -472,6 +472,27 @@ def init_db():
         },
         {
             'data': datetime.date.today(),
+            'ora': time(10, 0),
+            'sala_corso': 3,
+            'disponibilita': 30,
+            'fk_corso': "C006"
+        },
+        {
+            'data': datetime.date.today(),
+            'ora': time(15, 0),
+            'sala_corso': 5,
+            'disponibilita': 10,
+            'fk_corso': 'C007'
+        },
+        {
+            'data': datetime.date.today(),
+            'ora': time(12, 0),
+            'sala_corso': 6,
+            'disponibilita': 30,
+            'fk_corso': 'C008'
+        },
+        {
+            'data': datetime.date.today(),
             'ora': time(17, 0),
             'sala_corso': 1,
             'disponibilita': 30,
@@ -486,6 +507,48 @@ def init_db():
         },
         {
             'data': datetime.date.today() + timedelta(days=1),
+            'ora': time(10, 0),
+            'sala_corso': 1,
+            'disponibilita': 25,
+            'fk_corso': "C015"
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=1),
+            'ora': time(17, 0),
+            'sala_corso': 8,
+            'disponibilita': 20,
+            'fk_corso': 'C016'
+        },
+        {
+            'data': datetime.date.today()  + timedelta(days=1),
+            'ora': time(12, 0),
+            'sala_corso': 6,
+            'disponibilita': 30,
+            'fk_corso': 'C017'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=1),
+            'ora': time(18, 0),
+            'sala_corso': 2,
+            'disponibilita': 30,
+            'fk_corso': "C018"
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=1),
+            'ora': time(13, 0),
+            'sala_corso': 2,
+            'disponibilita': 20,
+            'fk_corso': 'C019'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=1),
+            'ora': time(8, 0),
+            'sala_corso': 1,
+            'disponibilita': 30,
+            'fk_corso': 'C001'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=1),
             'ora': time(12, 0),
             'sala_corso': 1,
             'disponibilita': 30,
@@ -497,6 +560,48 @@ def init_db():
             'sala_corso': 1,
             'disponibilita': 30,
             'fk_corso': 'C011'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=3),
+            'ora': time(9, 30),
+            'sala_corso': 1,
+            'disponibilita': 30,
+            'fk_corso': 'C001'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=3),
+            'ora': time(10, 0),
+            'sala_corso': 2,
+            'disponibilita': 30,
+            'fk_corso': 'C003'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=3),
+            'ora': time(11, 0),
+            'sala_corso': 1,
+            'disponibilita': 20,
+            'fk_corso': 'C004'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=3),
+            'ora': time(13, 0),
+            'sala_corso': 4,
+            'disponibilita': 30,
+            'fk_corso': 'C008'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=3),
+            'ora': time(14, 30),
+            'sala_corso': 5,
+            'disponibilita': 30,
+            'fk_corso': 'C009'
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=3),
+            'ora': time(19, 0),
+            'sala_corso': 6,
+            'disponibilita': 20,
+            'fk_corso': 'C010'
         },
         {
             'data': datetime.date.today() + timedelta(days=4),
@@ -538,6 +643,34 @@ def init_db():
             'ora': time(18, 0),
             'sala_corso': 9,
             'disponibilita': 15,
+            'fk_corso': "C006"
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=7),
+            'ora': time(10, 0),
+            'sala_corso': 1,
+            'disponibilita': 30,
+            'fk_corso': "C002"
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=7),
+            'ora': time(13, 0),
+            'sala_corso': 4,
+            'disponibilita': 25,
+            'fk_corso': "C007"
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=7),
+            'ora': time(15, 0),
+            'sala_corso': 3,
+            'disponibilita': 10,
+            'fk_corso': "C012"
+        },
+        {
+            'data': datetime.date.today() + timedelta(days=7),
+            'ora': time(11, 30),
+            'sala_corso': 5,
+            'disponibilita': 30,
             'fk_corso': "C010"
         },
 

@@ -103,6 +103,42 @@ class CreateCorsoForm(forms.ModelForm):
         model = Corso
         fields = ['idcorso','nome', 'categoria','descrizione','fk_trainer']
 
+class UpdateSessioneForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_id = "UpdateSessione_crispy_form"
+    helper.form_method = "POST"
+    helper.add_input(Submit("submit","Aggiorna Sessione"))
+
+    SALA_CHOICES = [(i, f"Sala {i}") for i in range(1, 11)]
+
+    sala_corso = forms.ChoiceField(choices=SALA_CHOICES, label="Sala Corso")
+
+    class Meta:
+        model = SessioneCorso
+        fields = ['fk_corso','data','ora','sala_corso', 'disponibilita']
+        widgets = {
+            'ora': forms.TimeInput(attrs={'placeholder': 'Format: HH:MM'}),
+            'data': forms.DateInput(attrs={'type': 'date'})
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        fk_corso = cleaned_data.get('fk_corso')
+        data = cleaned_data.get('data')
+        ora = cleaned_data.get('ora')
+        sala_corso = cleaned_data.get('sala_corso')
+
+        # Check if another course is scheduled in the same room, date, and time
+        same_room_session = SessioneCorso.objects.filter(
+            data=data,
+            ora=ora,
+            sala_corso=sala_corso
+        ).exclude(fk_corso=fk_corso).exists()
+
+        if same_room_session:
+            raise ValidationError("Un altro corso è già programmato in questa sala, data e ora.")
+
+
 class CreateSessioneForm(forms.ModelForm):
     helper = FormHelper()
     helper.form_id = "addSessione_crispy_form"
