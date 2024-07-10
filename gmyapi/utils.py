@@ -26,7 +26,8 @@ MAPPA_CORSI_AFFINI = {
     'Body Combat - Boxe': ['Personal Training', 'Functional Training', 'Body Pump'],
     'Body Combat - karate': ['Personal Training', 'Body Pump', 'Functional Training'],
     'Body Combat - taekwondo': ['Personal Training', 'Body Pump', 'Functional Training'],
-    'Functional Training': ['Personal Training', 'Stretching', 'Spinning avanzato']
+    'Functional Training': ['Personal Training', 'Stretching', 'Spinning avanzato'],
+    'TRX (Total Resistance Exercises)': ['Personal Training', 'Stretching', 'Step Aerobics']
 
     # Altre possibilità non sono stato a metterle tutte
 }

@@ -23,7 +23,7 @@ def homeGym(request):
     return render(request, template_name="gym/home_logged.html")
 
 @login_required
-def profilePage(request):
+def profilePage(request):#load pagina profilo e form per modifica foto, dati modificati a parte
     user = request.user
     if request.method == 'POST':
         form = UpdateImageForm(request.POST, request.FILES, instance=user)
@@ -39,15 +39,15 @@ def profilePage(request):
     }
     return render(request, 'gym/user/user_page.html', context)
 
-class PasswordChangeView(auth_views.PasswordChangeView):# UTILIZZO VIEW PREDEFINITE DI DJANGI
+class PasswordChangeView(LoginRequiredMixin, auth_views.PasswordChangeView):# UTILIZZO VIEW PREDEFINITE DI DJANGI
     template_name = 'gym/user/change_password.html'
     success_url = reverse_lazy('unimoregym:password_change_done')
 
-class PasswordChangeDoneView(auth_views.PasswordChangeDoneView):# UTILIZZO VIEW PREDEFINITE DI DJANGI
+class PasswordChangeDoneView(LoginRequiredMixin, auth_views.PasswordChangeDoneView):# UTILIZZO VIEW PREDEFINITE DI DJANGI
     template_name = 'gym/user/change_password_succces.html'
 
 @login_required
-def profile_update(request): #UPDATE DATI UTENTE, SEPRATO DA FOTO PROFILO
+def profile_update(request): #UPDATE DATI UTENTE, SEPRATO DA FOTO PROFILO e da password
     user = request.user
     if request.method == 'POST':
         form = GymUserUpdateForm(request.POST, instance=user)
@@ -59,7 +59,7 @@ def profile_update(request): #UPDATE DATI UTENTE, SEPRATO DA FOTO PROFILO
 
     return render(request, 'gym/user/user_data_modify.html', {'form': form})
 
-class CorsoListView(ListView): #llista dei corsi con funzioni di ricerca
+class CorsoListView(ListView): #lista dei corsi con funzioni di ricerca
     titolo = "Corsi offerti"
     model = Corso
     template_name = "gym/data_list/list_corsi.html"
@@ -102,13 +102,13 @@ class AttivazioneAbbonamento(LoginRequiredMixin, DetailView): #dettaglio per pre
     context_object_name = 'abbonamento'
 
     def post(self, request, *args, **kwargs):
-        abb = self.get_object()
+        abb = self.get_object() #abbonamento scelto
         user = request.user
 
         # Controlla se l'utente ha già un abbonamento attivo
         Abb_attivi = AbbonamentiAttivi.objects.filter(fk_utente=user)
         if Abb_attivi.exists():
-            for attivo in Abb_attivi:
+            for attivo in Abb_attivi: #controllo come lista perchè puo avere una coppia
                 # CONTROLLO CHE NON VOGLIA AVERE DUE ABBONAMENTI PC
                 if attivo.fk_abbonamento.codice_abbonamento.startswith("PC") and (abb.codice_abbonamento.startswith("PC") or abb.codice_abbonamento.startswith("PT")):
                     return render(request, 'gym/detail_abb.html', {
@@ -414,7 +414,7 @@ def prenota_sessione(request):  #ACTION PER LA PRENOTAZONE, LO USO NELLA RICERCA
     # Recuperare gli abbonamenti attivi dell'utente
     abbonamenti_attivi = AbbonamentiAttivi.objects.filter(fk_utente=user)
 
-    if not abbonamenti_attivi.exists():
+    if not abbonamenti_attivi.exists(): #se non ha abbonamenti rricarico il form e nessuna sesisone
         form = CercaSessioniForm()
         ctx = {'form': form, 'sessioni': [],
                'error_message': 'Non possiedi abbonamenti per la prenotazione'}
